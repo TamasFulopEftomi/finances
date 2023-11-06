@@ -2,19 +2,18 @@ package com.eftomi.finances.service;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 @Slf4j
 public class InterestService {
 
-    public int compoundInterestWithInitialCapital(int initialCapital, int interestRate, int maturity) {
+    public int cIWithInitialCapital(int initialCapital, int interestRate, int maturity) {
         double rate = 1 + (double) interestRate / 100;
         return (int) (initialCapital * Math.pow(rate, maturity));
     }
 
-    public Map<Integer, Integer> cIWithInitialCapitalInYearlyMap(int initialCapital, int interestRate, int maturity) {
+    public Map<Integer, Integer> cIWithInitialCapitalMap(int initialCapital, int interestRate, int maturity) {
         Map<Integer, Integer> cIWithInitialCapitalMap = new TreeMap<>();
         double rate = 1 + (double) interestRate / 100;
         int amount = initialCapital;
@@ -26,13 +25,13 @@ public class InterestService {
         return cIWithInitialCapitalMap;
     }
 
-    public int compoundInterestWithAnnualPayment(int annualPayment, int interestRate, int maturity) {
+    public int cIWithAnnualPayment(int annualPayment, int interestRate, int maturity) {
         double rate = 1 + (double) interestRate / 100;
         double geometricSequence = 1 * ((Math.pow(rate, maturity) - 1) / (rate - 1));
         return (int) (annualPayment * rate * geometricSequence);
     }
 
-    public Map<Integer, Integer> cIWithAnnualPaymentInYearlyMap(int annualPayment, int interestRate, int maturity) {
+    public Map<Integer, Integer> cIWithAnnualPaymentMap(int annualPayment, int interestRate, int maturity) {
         Map<Integer, Integer> cIWithInitialCapitalMap = new TreeMap<>();
         double rate = 1 + (double) interestRate / 100;
         int amount = 0;
@@ -44,13 +43,13 @@ public class InterestService {
         return cIWithInitialCapitalMap;
     }
 
-    public int compoundInterestWithInitialCapitalAndWithAnnualPayment(int initialCapital, int annualPayment, int interestRate, int maturity) {
-        int compoundInterestWithInitialCapital = compoundInterestWithInitialCapital(initialCapital, interestRate, maturity);
-        int compoundInterestWithAnnualPayment = compoundInterestWithAnnualPayment(annualPayment, interestRate, maturity);
+    public int cIWithInitialCapitalAndAnnualPayment(int initialCapital, int annualPayment, int interestRate, int maturity) {
+        int compoundInterestWithInitialCapital = cIWithInitialCapital(initialCapital, interestRate, maturity);
+        int compoundInterestWithAnnualPayment = cIWithAnnualPayment(annualPayment, interestRate, maturity);
         return compoundInterestWithInitialCapital + compoundInterestWithAnnualPayment;
     }
 
-    public Map<Integer, Integer> cIWithInitialCapitalAndWithAnnualPaymentInYearlyMap(int initialCapital, int annualPayment, int interestRate, int maturity) {
+    public Map<Integer, Integer> cIWithInitialCapitalAndAnnualPaymentMap(int initialCapital, int annualPayment, int interestRate, int maturity) {
         Map<Integer, Integer> cIWithInitialCapitalMap = new TreeMap<>();
         double rate = 1 + (double) interestRate / 100;
         int amount = initialCapital;
